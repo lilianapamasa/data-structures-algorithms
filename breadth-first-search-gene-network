@@ -1,0 +1,57 @@
+import networkx as nx
+
+G = nx.read_edgelist("large.graph.txt")
+nx.is_directed(G) #see if the graph given is a directed graph
+
+## Implement a breadth-first search algorithm
+source = "AT5G49450" #set the source node
+
+visited = set()
+queue = [source]
+
+while queue:
+  vertex = queue.pop(0)
+  if vertex in visited:
+    continue
+  visited.add(vertex)
+
+  neighbors = G.neighbors(vertex)
+  for neighbor in neighbors:
+    if neighbor not in visited: 
+      queue.append(neighbor)
+
+print(f"From {source} these are the nodes visited:")
+for node in visited:
+  print(node)
+
+
+## Determine the shortest path from source to target using BFS results
+
+s = "AT5G49450" ##source
+
+visited = set()
+queue = [s]
+
+BFS = nx.Graph()
+BFS.add_node(s)
+
+while queue:
+  vertex = queue.pop(0)
+  if vertex in visited:
+    continue
+  visited.add(vertex)
+
+  neighbors = G.neighbors(vertex)
+  for i in neighbors: 
+    if i not in visited:
+      queue.append(i)
+      BFS_tree.add_edge(vertex, i)
+
+v = "AT5G65210" ##target
+
+shortest_path = nx.shortest_path(BFS_tree, s, v)
+
+print(f"The shortest path from {s} to {v} is:")
+print(shortest_path)
+
+
